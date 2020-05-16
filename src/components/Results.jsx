@@ -7,7 +7,7 @@ const BAB_MODIFIER = 5;
 
 function Results() {
     const { watch, getValues } = useFormContext()
-    const { baseAttackBonus, abilityScore, weaponEnhancement } = getValues();
+    const { baseAttackBonus } = getValues();
     watch();
     const determineBaseAttacks = () => {
         let bab = parseInt(baseAttackBonus);
@@ -28,8 +28,6 @@ function Results() {
                 <Result
                     key={`result-${index}`}
                     baseAttackBonus={baseAttack}
-                    weaponEnhancement={weaponEnhancement}
-                    abilityScore={abilityScore}
                     attackCount={index}
                 />
             );

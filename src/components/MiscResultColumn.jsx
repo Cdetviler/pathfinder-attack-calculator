@@ -1,14 +1,15 @@
 import React from 'react';
 import '../App.css';
 import ResultColumn from './ResultColumn';
-import { PropTypes } from 'prop-types';
+import { getMiscValue } from '../miscValues';
+import { useFormContext } from 'react-hook-form';
 
-export default function MiscResultColumn({label}) {
+export default function MiscResultColumn() {
+    const { watch, getValues } = useFormContext()
+    const { offhand } = getValues();
+    watch('offhand');
+    const total = getMiscValue('offhand', offhand);
     return (
-        <ResultColumn label={label} value={0} />
+        <ResultColumn label="Misc" value={ total} />
     )
 };
-
-MiscResultColumn.propTypes = {
-    label: PropTypes.string.isRequired
-}
