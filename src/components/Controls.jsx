@@ -27,7 +27,7 @@ function Controls(){
             <h2 className="text-xl">Misc Modifiers</h2>
             <Radio
                 name="weaponSet"
-                label="Weapon Set"
+                label="Attack Type"
                 options={
                     [
                         {value:'oneHand', label:'One Handed Weapon'},

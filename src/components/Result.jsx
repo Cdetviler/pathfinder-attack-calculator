@@ -1,13 +1,8 @@
 import React from 'react';
 import '../App.css';
-import { attackColors, attackTranslations } from '../attacks';
-import ResultColumn from './ResultColumn';
-import MiscResultColumn from './MiscResultColumn';
-import TotalColumn from './TotalColumn';
-import AbilityScoreColumn from './AbilityScoreColumn';
-import WeaponEnhancementColumn from './WeaponEnhancementColumn';
+import { attackColors, attackTranslations } from '../attacks'
 
-function Result({baseAttackBonus, attackCount}) {
+function Result({ attackCount, children}) {
     const color = attackColors[attackCount];
     const attackTranslation = attackTranslations[attackCount];
 
@@ -17,11 +12,7 @@ function Result({baseAttackBonus, attackCount}) {
         >
             <h2 className={`text-${color}-800 text-xl`}>{attackTranslation}</h2>
             <div className={`w-full flex flex-row text-${color}-800`} key={attackCount}>
-                <ResultColumn label="Base Attack Bonus" value={baseAttackBonus} />
-                <AbilityScoreColumn />
-                <WeaponEnhancementColumn />
-                <MiscResultColumn />
-                <TotalColumn baseAttackBonus={ baseAttackBonus} />
+                {children}
             </div>
         </div>
     )
