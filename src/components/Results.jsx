@@ -36,11 +36,11 @@ function Results() {
                     baseAttackBonus={baseAttack}
                     attackCount={index}
                 >
-                    <ResultColumn label="Base Attack Bonus" value={ baseAttackBonus } />
+                    <ResultColumn label="Base Attack Bonus" value={ baseAttack } />
                     <AbilityScoreColumn />
                     <WeaponEnhancementColumn />
                     <MiscResultColumn />
-                    <TotalColumn baseAttackBonus={ baseAttackBonus } />
+                    <TotalColumn baseAttackBonus={ baseAttack } />
                 </Result>
             );
         })
