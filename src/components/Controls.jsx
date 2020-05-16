@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import TextInput from './form_components/TextInput';
 import Select from './form_components/Select';
-import Checkbox from './form_components/Checkbox';
+import Radio from './form_components/Radio';
 
 function Controls(){
 
@@ -25,7 +25,18 @@ function Controls(){
                 { renderNumericalOptions(5, 'weaponEnhancement') }
             </Select>
             <h2 className="text-xl">Misc Modifiers</h2>
-            <Checkbox name="offhand" label="Using Offhand" />
+            <Radio
+                name="weaponSet"
+                label="Weapon Set"
+                options={
+                    [
+                        {value:'oneHand', label:'One Handed Weapon'},
+                        {value:'twoWeapon', label:'Weapon + Offhand'},
+                        {value:'weaponAndShield', label: 'Weapon + Shield' },
+                        {value:'twoHanded', label:'Two Handed Weapon'}
+                    ]
+                }
+            />
         </div>
     );
 }

@@ -11,7 +11,7 @@ function App() {
       baseAttackBonus: 0,
       weaponEnhancement: 0,
       abilityScore: 0,
-      offhand: false
+      weaponSet: 'oneHand'
     }
   });
   const flexCss = "flex flex-col lg:flex-row xl:flex-row";

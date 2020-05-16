@@ -1,5 +1,5 @@
 const MISC_VALUE_MAP = {
-    'offhand': -10
+    'twoWeapon': -10
 };
 
 export const getMiscValue = (key, value) => {
