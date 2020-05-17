@@ -3,6 +3,7 @@ import '../App.css';
 import TextInput from './form_components/TextInput';
 import Select from './form_components/Select';
 import Radio from './form_components/Radio';
+import OffhandControls from './OffhandControls';
 
 function Controls(){
 
@@ -37,6 +38,7 @@ function Controls(){
                     ]
                 }
             />
+            <OffhandControls />
         </div>
     );
 }

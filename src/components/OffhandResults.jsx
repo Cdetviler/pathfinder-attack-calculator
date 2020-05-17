@@ -2,31 +2,49 @@ import React from 'react';
 import '../App.css';
 import { useFormContext } from 'react-hook-form';
 import Result from './Result';
-import ResultColumn from './ResultColumn';
-import MiscResultColumn from './MiscResultColumn';
-import TotalColumn from './TotalColumn';
-import AbilityScoreColumn from './AbilityScoreColumn';
-import WeaponEnhancementColumn from './WeaponEnhancementColumn';
+import {
+    OFF_HAND_PENALTY,
+    OFF_HAND_WITH_LIGHT_WEAPON,
+    OFF_HAND_WITH_TWO_WEAPON_FIGHTING,
+    OFF_HAND_WITH_BOTH
+} from '../constants';
 
 export default function OffhandResults() {
     const { watch, getValues } = useFormContext()
-    const { weaponSet, baseAttackBonus } = getValues();
+    const { 
+        weaponSet,
+        baseAttackBonus,
+        abilityScore,
+        weaponEnhancement,
+        offhandLight,
+        twoWeaponFightingFeat
+    } = getValues();
+
+    const getOffhandPenalty = () => {
+        let penalty = OFF_HAND_PENALTY;
+        penalty = offhandLight ? OFF_HAND_WITH_LIGHT_WEAPON : penalty;
+        penalty = twoWeaponFightingFeat ? OFF_HAND_WITH_TWO_WEAPON_FIGHTING : penalty;
+        penalty = offhandLight && twoWeaponFightingFeat ? OFF_HAND_WITH_BOTH  : penalty;
+
+        return penalty;
+    }
+
     const hasOffhand = weaponSet === 'weaponAndShield' || weaponSet ==='twoWeapon';
-    console.log(hasOffhand);
-    watch(['weaponSet', 'baseAttackBonus']);
+    const misc = getOffhandPenalty();
+    watch();
 
     return (
         <>
             { hasOffhand && (
                 <>
                     <h2 className="text-xl">Offhand Attacks</h2>
-                    <Result baseAttackBonus={baseAttackBonus} attackCount={0}>
-                        <ResultColumn label="Base Attack Bonus" value={ baseAttackBonus } />
-                        <AbilityScoreColumn />
-                        <WeaponEnhancementColumn />
-                        <MiscResultColumn isOffhandAttack={true} />
-                        <TotalColumn baseAttackBonus={ baseAttackBonus } isOffhandAttack={ true } />
-                    </Result>
+                    <Result
+                        weaponEnhancement={weaponEnhancement}
+                        abilityScore={abilityScore}
+                        baseAttackBonus={baseAttackBonus}
+                        misc={misc}
+                        attackCount={0}
+                    />
                 </>
             )}
         </>

@@ -2,19 +2,28 @@ import React from 'react';
 import '../App.css';
 import { useFormContext } from 'react-hook-form';
 import Result from './Result';
-import OffhandResults from './OffhandResults';
-import ResultColumn from './ResultColumn';
-import MiscResultColumn from './MiscResultColumn';
-import TotalColumn from './TotalColumn';
-import AbilityScoreColumn from './AbilityScoreColumn';
-import WeaponEnhancementColumn from './WeaponEnhancementColumn';
+import {
+    MAIN_HAND_PENALTY,
+    MAIN_HAND_WITH_LIGHT_WEAPON,
+    MAIN_HAND_WITH_TWO_WEAPON_FIGHTING,
+    MAIN_HAND_WITH_BOTH
+} from '../constants';
 
 const BAB_MODIFIER = 5;
 
 function Results() {
     const { watch, getValues } = useFormContext()
-    const { baseAttackBonus } = getValues();
+    const {
+        weaponSet,
+        baseAttackBonus,
+        weaponEnhancement,
+        abilityScore,
+        offhandLight,
+        twoWeaponFightingFeat
+    } = getValues();
+
     watch();
+
     const determineBaseAttacks = () => {
         let bab = parseInt(baseAttackBonus);
         const baseAttackBonuses = [bab];
@@ -27,33 +36,39 @@ function Results() {
         return baseAttackBonuses;
     }
 
+    const getOffhandPenalty = () => {
+        const hasOffhand = weaponSet === 'weaponAndShield' || weaponSet === 'twoWeapon';
+        let penalty = hasOffhand ? MAIN_HAND_PENALTY : 0;
+        penalty = offhandLight ? MAIN_HAND_WITH_LIGHT_WEAPON : penalty;
+        penalty = twoWeaponFightingFeat ? MAIN_HAND_WITH_TWO_WEAPON_FIGHTING : penalty;
+        penalty = offhandLight && twoWeaponFightingFeat ? MAIN_HAND_WITH_BOTH : penalty;
+
+        return penalty;
+    }
+
+    const miscValue = getOffhandPenalty();
+    
     const renderResults = () => {
         const baseAttacks = determineBaseAttacks();
         return baseAttacks.map((baseAttack, index) => {
             return (
                 <Result
                     key={`result-${index}`}
+                    abilityScore={abilityScore}
                     baseAttackBonus={baseAttack}
                     attackCount={index}
-                >
-                    <ResultColumn label="Base Attack Bonus" value={ baseAttack } />
-                    <AbilityScoreColumn />
-                    <WeaponEnhancementColumn />
-                    <MiscResultColumn />
-                    <TotalColumn baseAttackBonus={ baseAttack } />
-                </Result>
+                    weaponEnhancement={ weaponEnhancement }
+                    misc={miscValue}
+                />
             );
         })
     };
 
     return (
-        <div className="flex-grow p-2">
-            <div className="flex flex-col space-y-4">
-                <h2 className="text-xl">Primary Attacks</h2>
-                { renderResults() }
-                <OffhandResults />
-            </div>   
-        </div>
+        <>
+            <h2 className="text-xl">Primary Attacks</h2>
+            { renderResults() }
+        </>
     );
 }
 

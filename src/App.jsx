@@ -3,6 +3,7 @@ import './tailwind.generated.css';
 import './App.css';
 import Controls from './components/Controls';
 import Results from './components/Results';
+import OffhandResults from './components/OffhandResults';
 import { FormContext, useForm } from 'react-hook-form';
 
 function App() {
@@ -11,7 +12,9 @@ function App() {
       baseAttackBonus: 0,
       weaponEnhancement: 0,
       abilityScore: 0,
-      weaponSet: 'oneHand'
+      weaponSet: 'oneHand',
+      twoWeaponFightingFeat: false,
+      offhandLight: false
     }
   });
   const flexCss = "flex flex-col lg:flex-row xl:flex-row";
@@ -24,7 +27,12 @@ function App() {
           <form onSubmit={ () => { } }>
             <div className={`${flexCss} ${spaceCss}`}>
               <Controls />
-              <Results />     
+              <div className="flex-grow p-2">
+                <div className="flex flex-col space-y-4">
+                  <Results />
+                  <OffhandResults />
+                </div>
+              </div>
             </div>
           </form>
         </FormContext>
