@@ -14,7 +14,9 @@ function App() {
       abilityScore: 0,
       weaponSet: 'oneHand',
       twoWeaponFightingFeat: false,
-      offhandLight: false
+      offhandLight: false,
+      improvedTwoWeaponFightingFeat: false,
+      greaterTwoWeaponFightingFeat: false
     }
   });
   const flexCss = "flex flex-col lg:flex-row xl:flex-row";

@@ -17,7 +17,9 @@ export default function OffhandResults() {
         abilityScore,
         weaponEnhancement,
         offhandLight,
-        twoWeaponFightingFeat
+        twoWeaponFightingFeat,
+        improvedTwoWeaponFightingFeat,
+        greaterTwoWeaponFightingFeat
     } = getValues();
 
     const getOffhandPenalty = () => {
@@ -45,6 +47,24 @@ export default function OffhandResults() {
                         misc={misc}
                         attackCount={0}
                     />
+                    { improvedTwoWeaponFightingFeat && (
+                        <Result
+                            weaponEnhancement={ weaponEnhancement }
+                            abilityScore={ abilityScore }
+                            baseAttackBonus={ baseAttackBonus - 5 }
+                            misc={ misc }
+                            attackCount={ 1 }
+                        />
+                    )}
+                    { greaterTwoWeaponFightingFeat && (
+                        <Result
+                            weaponEnhancement={ weaponEnhancement }
+                            abilityScore={ abilityScore }
+                            baseAttackBonus={ baseAttackBonus - 10 }
+                            misc={ misc }
+                            attackCount={ 2 }
+                        />
+                    )}
                 </>
             )}
         </>
