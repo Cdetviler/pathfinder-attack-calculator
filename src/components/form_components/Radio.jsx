@@ -26,7 +26,7 @@ export default function Radio({ name, label, options, className }) {
 
     return (
         <label>
-            { label && <div> { label } </div> }
+            { label && <div className="font-semibold"> { label } </div> }
             {renderRadioInputs()}
         </label>
     );

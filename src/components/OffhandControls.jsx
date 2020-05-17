@@ -16,11 +16,12 @@ export default function OffhandControls() {
     return (
         <>
             {shouldRender && (
-                <>
+                <div className="flex flex-col">
+                    <div className="font-semibold">Offhand Modifiers/Feats</div>
                     <Checkbox name="offhandLight" label="Light offhand" />
                     <Checkbox
                         name="twoWeaponFightingFeat"
-                        label="Feat: Two Weapon Fighting"
+                        label="Two Weapon Fighting"
                         onChange={() => {
                             resetValues([
                                 { improvedTwoWeaponFightingFeat: false},
@@ -31,17 +32,17 @@ export default function OffhandControls() {
                     { twoWeaponFightingFeat && (
                         <Checkbox
                             name="improvedTwoWeaponFightingFeat"
-                            label="Feat: Improved Two Weapon Fighting"
+                            label="Improved Two Weapon Fighting"
                             onChange={ () => {resetValues([{"greaterTwoWeaponFightingFeat": false}])}}
                         />
                     )}
                     { improvedTwoWeaponFightingFeat && (
                         <Checkbox
                             name="greaterTwoWeaponFightingFeat"
-                            label="Feat: Greater Two Weapon Fighting"
+                            label="Greater Two Weapon Fighting"
                         />
                     )}
-                </>
+                </div>
             )}
         </>
     );

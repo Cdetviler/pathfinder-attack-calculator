@@ -17,6 +17,7 @@ function Results() {
         weaponSet,
         baseAttackBonus,
         weaponEnhancement,
+        miscValue,
         abilityScore,
         offhandLight,
         twoWeaponFightingFeat
@@ -46,7 +47,7 @@ function Results() {
         return penalty;
     }
 
-    const miscValue = getOffhandPenalty();
+    const miscValues = parseInt(miscValue) + getOffhandPenalty();
     
     const renderResults = () => {
         const baseAttacks = determineBaseAttacks();
@@ -58,7 +59,7 @@ function Results() {
                     baseAttackBonus={baseAttack}
                     attackCount={index}
                     weaponEnhancement={ weaponEnhancement }
-                    misc={miscValue}
+                    misc={miscValues}
                 />
             );
         })

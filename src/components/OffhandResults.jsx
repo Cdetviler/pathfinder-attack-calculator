@@ -16,6 +16,7 @@ export default function OffhandResults() {
         baseAttackBonus,
         abilityScore,
         weaponEnhancement,
+        miscValue,
         offhandLight,
         twoWeaponFightingFeat,
         improvedTwoWeaponFightingFeat,
@@ -32,7 +33,7 @@ export default function OffhandResults() {
     }
 
     const hasOffhand = weaponSet === 'weaponAndShield' || weaponSet ==='twoWeapon';
-    const misc = getOffhandPenalty();
+    const misc = parseInt(miscValue) + getOffhandPenalty();
     watch();
 
     return (
